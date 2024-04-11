@@ -116,19 +116,6 @@ namespace TreeLab5
             printBT("", node, false);
         }
 
-public int NodeHeight(Node<T>? startWithNode)
-{
-    int left, right, height;
-    height = 0;
-    if (startWithNode != null)
-    {
-        left = NodeHeight(startWithNode.LeftNode);
-        right = NodeHeight(startWithNode.RightNode);
-        height = (left > right ? left : right) + 1;
-    }
-    return height;
-}
-
 
         public int CountNodesTree(Node<T>? startWithNode)
         {
@@ -198,23 +185,23 @@ public int NodeHeight(Node<T>? startWithNode)
         }
 
 
-public Node<T> RandomInsert(Node<T> nodeToInsert, Node<T>? startWithNode = null)
-{
-    Random rnd = new Random();
-    if (startWithNode == null) return nodeToInsert;
-    if (rnd.Next(0, CountNodesTree(startWithNode) + 1) == 1)
+    public Node<T> RandomInsert(Node<T> nodeToInsert, Node<T>? startWithNode = null)
     {
-        return InsertRoot(nodeToInsert, startWithNode);
+        Random rnd = new Random();
+        if (startWithNode == null) return nodeToInsert;
+        if (rnd.Next(0, CountNodesTree(startWithNode) + 1) == 1)
+        {
+            return InsertRoot(nodeToInsert, startWithNode);
+        }
+        if (nodeToInsert.Data.CompareTo(startWithNode.Data) < 0)
+        {
+            return InsertNode(nodeToInsert, startWithNode.LeftNode);
+        }
+        else
+        {
+            return InsertNode(nodeToInsert, startWithNode.RightNode);
+        }
     }
-    if (nodeToInsert.Data.CompareTo(startWithNode.Data) < 0)
-    {
-        return InsertNode(nodeToInsert, startWithNode.LeftNode);
-    }
-    else
-    {
-        return InsertNode(nodeToInsert, startWithNode.RightNode);
-    }
-}
 
         public int GetSumLengthPathToEvens(Node<int> startWithNode, int currentLength = 0)
         {
@@ -245,6 +232,20 @@ public Node<T> RandomInsert(Node<T> nodeToInsert, Node<T>? startWithNode = null)
         public Node(T data)
         {
             Data = data;
+        }
+
+
+        public int NodeHeight(Node<T>? startWithNode)
+        {
+            int left, right, height;
+            height = 0;
+            if (startWithNode != null)
+            {
+                left = NodeHeight(startWithNode.LeftNode);
+                right = NodeHeight(startWithNode.RightNode);
+                height = (left > right ? left : right) + 1;
+            }
+            return height;
         }
     }
 
