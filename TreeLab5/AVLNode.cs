@@ -39,7 +39,6 @@ namespace TreeLab5
             node.FixHeight();
             if (node.BalanceFactor() == 2)
             {
-                Console.WriteLine("A");
                 if (node.RightNode.BalanceFactor() < 0)
                 {
 
